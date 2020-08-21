@@ -1,8 +1,5 @@
-# CrApp
-A base for cross platform C++ application development using SDL2 and SQLite3
-
-# Note
-The prerequisite libraries are expected to be installed for both your linux distribution and whatever your mingw roots are.
+# CSVGuy
+A small application for editing CSV files, so I can learn more about SDL_gfx and stream processing.
 
 # Building and Packing
 * build.sh - will build both the linux and windows builds in their own directories 
