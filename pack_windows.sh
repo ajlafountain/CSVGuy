@@ -2,18 +2,26 @@
 
 PROJECT_NAME=$(basename $PWD)
 
-[ -f windows_release.zip ] && rm windows_release.zip
+#Check for and delete files and folders from passed runs
+[ -f ${PROJECT_NAME}.zip ] && rm ${PROJECT_NAME}.zip
 [ -d windows_release_tmp ] && rm -r windows_release_tmp
-[ -d windows_release_tmp/bin ] && rm -r windows_release_tmp/bin
+[ -d windows_release_tmp/app ] && rm -r windows_release_tmp/app
+
+#Create folders and copy files
 mkdir windows_release_tmp
-mkdir windows_release_tmp/bin
-cp build_windows/*".dll" windows_release_tmp/bin
-cp build_windows/*".exe" windows_release_tmp/bin
-cp -r assets windows_release_tmp/assets
+mkdir windows_release_tmp/app
+cp build_windows/*".dll" windows_release_tmp/app
+cp build_windows/*".exe" windows_release_tmp/app
+cp -r assets windows_release_tmp/app/assets
+
+#Create launcher
 cat << EOF > windows_release_tmp/app_launcher.bat
-start bin/$PROJECT_NAME.exe
+cd app
+start $PROJECT_NAME.exe
 exit
 EOF
+
+#Pack zip
 mv windows_release_tmp ${PROJECT_NAME}
 zip -rm ${PROJECT_NAME}.zip ${PROJECT_NAME}
 
